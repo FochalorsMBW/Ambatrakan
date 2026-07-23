@@ -1,0 +1,21 @@
+# Gradle / Android build output
+.gradle/
+build/
+app/build/
+functions/build/
+*.apk
+*.aab
+
+# Local config & secrets (JANGAN commit)
+local.properties
+app/google-services.json
+functions/node_modules/
+
+# IDE
+.idea/
+.kotlin/
+*.iml
+.DS_Store
+
+# graphify (regenerate via /graphify)
+graphify-out/
