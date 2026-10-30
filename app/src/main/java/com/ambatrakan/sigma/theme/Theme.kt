@@ -16,46 +16,69 @@ import androidx.compose.ui.unit.dp
 private val DarkColorScheme = darkColorScheme(
     primary = BluePrimaryDark,
     onPrimary = TextDark,
+    primaryContainer = BlueContainerDark,
+    onPrimaryContainer = BluePrimaryDark,
+    secondary = TealSecondaryDark,
+    onSecondary = TextDark,
+    tertiary = PinkTertiaryDark,
+    onTertiary = TextDark,
     background = BackgroundDark,
     onBackground = TextLight,
     surface = SurfaceDark,
     onSurface = TextLight,
-    surfaceVariant = SurfaceDark,
+    surfaceVariant = BorderDark,
     onSurfaceVariant = TextSecondaryDark,
     outline = BorderDark,
     error = RedStatus,
-    onError = TextLight
+    onError = TextLight,
+    errorContainer = RedContainerDark,
+    onErrorContainer = RedContainerLight
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = BluePrimary,
     onPrimary = SurfaceLight,
+    primaryContainer = BlueContainerLight,
+    onPrimaryContainer = BluePrimary,
+    secondary = TealSecondary,
+    onSecondary = SurfaceLight,
+    tertiary = PinkTertiary,
+    onTertiary = SurfaceLight,
     background = BackgroundLight,
     onBackground = TextDark,
     surface = SurfaceLight,
     onSurface = TextDark,
-    surfaceVariant = SurfaceLight,
+    surfaceVariant = BackgroundLight,
     onSurfaceVariant = TextSecondaryLight,
     outline = BorderLight,
     error = RedStatus,
-    onError = SurfaceLight
+    onError = SurfaceLight,
+    errorContainer = RedContainerLight,
+    onErrorContainer = OrangeText
 )
 
+// Bentuk yang lebih membulat & playful (sebelumnya flat 2-4dp). Selaras dengan
+// RoundedCornerShape inline 16-24dp yang sudah dipakai kartu-kartu di layar.
 val AmbatrakanShapes = Shapes(
-    extraSmall = RoundedCornerShape(2.dp),
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(4.dp),
-    extraLarge = RoundedCornerShape(4.dp)
+    extraSmall = RoundedCornerShape(8.dp),
+    small = RoundedCornerShape(12.dp),
+    medium = RoundedCornerShape(16.dp),
+    large = RoundedCornerShape(24.dp),
+    extraLarge = RoundedCornerShape(28.dp)
 )
 
 @Composable
 fun AmbatrakanTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themeMode: ThemeMode = ThemeMode.SYSTEM,
     // Dynamic color is disabled by default to maintain the consistent premium Ambatrakan branding
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit,
 ) {
+    val darkTheme = when (themeMode) {
+        ThemeMode.SYSTEM -> isSystemInDarkTheme()
+        ThemeMode.LIGHT -> false
+        ThemeMode.DARK -> true
+    }
     val colorScheme =
         when {
             dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {

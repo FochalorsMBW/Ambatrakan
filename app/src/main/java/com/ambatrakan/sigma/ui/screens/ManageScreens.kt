@@ -530,7 +530,7 @@ fun ManageBillsScreen(viewModel: SettingsViewModel, onDismiss: () -> Unit) {
                                     viewModel.updateBillingItem(updatedBill)
                                     activeEditBillingItem = null
                                 },
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD97706)),
+                                colors = ButtonDefaults.buttonColors(containerColor = AccentEnergy),
                                 shape = RoundedCornerShape(12.dp),
                                 modifier = Modifier.fillMaxWidth().height(48.dp)
                             ) {
@@ -678,13 +678,13 @@ fun ManageKasDialog(
                                             selected = type == "PEMASUKAN",
                                             onClick = { type = "PEMASUKAN" },
                                             label = { Text("Pemasukan") },
-                                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Color(0xFF10B981), selectedLabelColor = Color.White)
+                                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = GreenStatus, selectedLabelColor = Color.White)
                                         )
                                         FilterChip(
                                             selected = type == "PENGELUARAN",
                                             onClick = { type = "PENGELUARAN" },
                                             label = { Text("Pengeluaran") },
-                                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = Color(0xFFEF4444), selectedLabelColor = Color.White)
+                                            colors = FilterChipDefaults.filterChipColors(selectedContainerColor = RedStatus, selectedLabelColor = Color.White)
                                         )
                                     }
 
@@ -759,7 +759,7 @@ fun ManageKasDialog(
                                 Text(
                                     text = (if (isIncome) "+" else "-") + formatRupiah(log.amount),
                                     fontWeight = FontWeight.Bold,
-                                    color = if (isIncome) Color(0xFF10B981) else Color(0xFFEF4444)
+                                    color = if (isIncome) GreenStatus else RedStatus
                                 )
                             }
                         }

@@ -7,6 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.ambatrakan.sigma.theme.AmbatrakanTheme
 
@@ -41,7 +43,8 @@ class MainActivity : FragmentActivity() {
 
     enableEdgeToEdge()
     setContent {
-      AmbatrakanTheme { Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { MainNavigation() } }
+      val themeMode by (application as AmbatrakanApplication).themePreferences.themeMode.collectAsState()
+      AmbatrakanTheme(themeMode = themeMode) { Surface(modifier = Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { MainNavigation() } }
     }
   }
 }

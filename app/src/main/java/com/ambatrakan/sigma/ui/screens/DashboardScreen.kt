@@ -26,6 +26,11 @@ import com.ambatrakan.sigma.data.model.Tenant
 import com.ambatrakan.sigma.data.model.TransactionLog
 import com.ambatrakan.sigma.data.model.KasLog
 import com.ambatrakan.sigma.data.model.PaymentStatus
+import com.ambatrakan.sigma.theme.GreenStatus
+import com.ambatrakan.sigma.theme.YellowStatus
+import com.ambatrakan.sigma.theme.OrangeText
+import com.ambatrakan.sigma.theme.AccentEnergy
+import com.ambatrakan.sigma.theme.YellowContainerLight
 
 import com.ambatrakan.sigma.ui.viewmodel.DashboardViewModel
 import java.text.NumberFormat
@@ -251,7 +256,7 @@ fun QueueScheduleSection(
                                 Icon(
                                     if (item.name.contains("Galon", true)) Icons.Default.WaterDrop else Icons.Default.ElectricBolt,
                                     contentDescription = null,
-                                    tint = if (item.name.contains("Galon", true)) MaterialTheme.colorScheme.primary else Color(0xFFF59E0B)
+                                    tint = if (item.name.contains("Galon", true)) MaterialTheme.colorScheme.primary else YellowStatus
                                 )
                             }
                             Spacer(modifier = Modifier.width(16.dp))
@@ -389,7 +394,7 @@ fun MyPendingBillsSection(
                         .padding(24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Icon(Icons.Default.CheckCircle, contentDescription = null, tint = Color(0xFF10B981), modifier = Modifier.size(48.dp))
+                    Icon(Icons.Default.CheckCircle, contentDescription = null, tint = GreenStatus, modifier = Modifier.size(48.dp))
                     Spacer(modifier = Modifier.height(16.dp))
                     Text("Yeay! Semua aman.", fontWeight = FontWeight.Bold, fontSize = 16.sp)
                     Spacer(modifier = Modifier.height(4.dp))
@@ -424,7 +429,7 @@ fun MyPendingBillsSection(
 
                     val (containerColor, contentColor, iconTint) = when {
                         isMyTurn && !isMyPending -> Triple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer, MaterialTheme.colorScheme.error)
-                        isMyTurn && isMyPending -> Triple(Color(0xFFFEF3C7), Color(0xFF92400E), Color(0xFFD97706)) // Yellow/Amber
+                        isMyTurn && isMyPending -> Triple(YellowContainerLight, OrangeText, AccentEnergy) // Yellow/Amber
                         else -> Triple(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface, MaterialTheme.colorScheme.primary)
                     }
 
@@ -468,7 +473,7 @@ fun MyPendingBillsSection(
                                     }
                                 } else {
                                     if (lastLog != null && lastLog.tenantId == currentTenantId && lastLog.status == PaymentStatus.LUNAS) {
-                                        Text("Sudah dibayar.", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color(0xFF10B981))
+                                        Text("Sudah dibayar.", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = GreenStatus)
                                     } else {
                                         Text("Sekarang: $currentPicName", fontSize = 14.sp, fontWeight = FontWeight.Medium, color = contentColor)
                                     }
@@ -522,7 +527,7 @@ fun AdminPendingApprovalsSection(
                     .fillMaxWidth()
                     .padding(bottom = 12.dp),
                 shape = RoundedCornerShape(20.dp),
-                colors = CardDefaults.cardColors(containerColor = Color(0xFFFEF3C7)),
+                colors = CardDefaults.cardColors(containerColor = YellowContainerLight),
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
@@ -531,16 +536,16 @@ fun AdminPendingApprovalsSection(
                             modifier = Modifier
                                 .size(40.dp)
                                 .clip(CircleShape)
-                                .background(Color(0xFFD97706).copy(alpha = 0.2f)),
+                                .background(AccentEnergy.copy(alpha = 0.2f)),
                             contentAlignment = Alignment.Center
                         ) {
-                            Icon(Icons.Default.Notifications, contentDescription = null, tint = Color(0xFFD97706))
+                            Icon(Icons.Default.Notifications, contentDescription = null, tint = AccentEnergy)
                         }
                         Spacer(modifier = Modifier.width(16.dp))
                         Column(modifier = Modifier.weight(1f)) {
-                            Text("${log.tenantName} telah membayar", fontSize = 14.sp, color = Color(0xFF92400E))
-                            Text(log.billingItemName, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = Color(0xFF92400E))
-                            Text(formatRupiah(log.amount), fontWeight = FontWeight.Bold, fontSize = 14.sp, color = Color(0xFF92400E))
+                            Text("${log.tenantName} telah membayar", fontSize = 14.sp, color = OrangeText)
+                            Text(log.billingItemName, fontWeight = FontWeight.Bold, fontSize = 16.sp, color = OrangeText)
+                            Text(formatRupiah(log.amount), fontWeight = FontWeight.Bold, fontSize = 14.sp, color = OrangeText)
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
@@ -556,7 +561,7 @@ fun AdminPendingApprovalsSection(
                         }
                         Button(
                             onClick = { onApprove(log.id) },
-                            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF10B981)),
+                            colors = ButtonDefaults.buttonColors(containerColor = GreenStatus),
                             shape = RoundedCornerShape(12.dp)
                         ) {
                             Text("Terima", fontWeight = FontWeight.Bold)
@@ -588,7 +593,7 @@ fun SharedOrGlobalBillCard(
     
     val (containerColor, contentColor, iconTint) = when {
         isMyTurn && !isMyPending -> Triple(MaterialTheme.colorScheme.errorContainer, MaterialTheme.colorScheme.onErrorContainer, MaterialTheme.colorScheme.error)
-        isMyTurn && isMyPending -> Triple(Color(0xFFFEF3C7), Color(0xFF92400E), Color(0xFFD97706)) // Yellow/Amber
+        isMyTurn && isMyPending -> Triple(YellowContainerLight, OrangeText, AccentEnergy) // Yellow/Amber
         else -> Triple(MaterialTheme.colorScheme.surface, MaterialTheme.colorScheme.onSurface, MaterialTheme.colorScheme.primary)
     }
 
@@ -621,7 +626,7 @@ fun SharedOrGlobalBillCard(
                             Text("Segera bayar bagianmu!", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = contentColor)
                         }
                     } else {
-                        Text("Sudah Lunas \uD83C\uDF89", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = Color(0xFF10B981))
+                        Text("Sudah Lunas \uD83C\uDF89", fontSize = 14.sp, fontWeight = FontWeight.Bold, color = GreenStatus)
                     }
                 }
                 
@@ -658,7 +663,7 @@ fun SharedOrGlobalBillCard(
                 LinearProgressIndicator(
                     progress = { progress },
                     modifier = Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)),
-                    color = Color(0xFF10B981),
+                    color = GreenStatus,
                     trackColor = contentColor.copy(alpha = 0.2f)
                 )
             }
@@ -686,9 +691,9 @@ fun SharedOrGlobalBillCard(
                         Text(tenant.name + if(tenant.isAway) " ✈\uFE0F" else "", fontSize = 14.sp, color = contentColor)
                     }
                     if (index == 0) {
-                        Text("🥇 Gilo Amba 😂", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = Color(0xFFF59E0B))
+                        Text("🥇 Gilo Amba 😂", fontSize = 12.sp, fontWeight = FontWeight.Bold, color = YellowStatus)
                     } else {
-                        Text("✅ Lunas", fontSize = 12.sp, color = Color(0xFF10B981))
+                        Text("✅ Lunas", fontSize = 12.sp, color = GreenStatus)
                     }
                 }
             }

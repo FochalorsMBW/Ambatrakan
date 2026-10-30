@@ -2,9 +2,11 @@ package com.ambatrakan.sigma
 
 import android.app.Application
 import com.ambatrakan.sigma.data.repository.AmbatrakanRepository
+import com.ambatrakan.sigma.theme.ThemePreferences
 
 class AmbatrakanApplication : Application() {
     val repository by lazy { AmbatrakanRepository(this) }
+    val themePreferences by lazy { ThemePreferences(this) }
     
     override fun onCreate() {
         super.onCreate()

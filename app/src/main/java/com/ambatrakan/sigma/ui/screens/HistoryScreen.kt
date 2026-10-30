@@ -21,6 +21,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ambatrakan.sigma.data.model.TransactionLog
 import com.ambatrakan.sigma.data.model.PaymentStatus
+import com.ambatrakan.sigma.theme.GreenStatus
+import com.ambatrakan.sigma.theme.RedStatus
+import com.ambatrakan.sigma.theme.RedContainerLight
 // removed import
 import com.ambatrakan.sigma.ui.viewmodel.HistoryViewModel
 import java.text.NumberFormat
@@ -160,13 +163,13 @@ fun HistoryScreen(
                                 .padding(top = 16.dp)
                                 .size(32.dp)
                                 .clip(CircleShape)
-                                .background(if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Color(0xFFFEE2E2) else MaterialTheme.colorScheme.primary),
+                                .background(if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) RedContainerLight else MaterialTheme.colorScheme.primary),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Icons.Default.ErrorOutline else Icons.Default.WaterDrop,
                                 contentDescription = null,
-                                tint = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Color(0xFFDC2626) else MaterialTheme.colorScheme.onPrimary,
+                                tint = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) RedStatus else MaterialTheme.colorScheme.onPrimary,
                                 modifier = Modifier.size(16.dp)
                             )
                         }
@@ -203,17 +206,17 @@ fun HistoryScreen(
                                         (if (isExpense) "-" else "") + formatRupiah(log.amount),
                                         fontWeight = FontWeight.Bold,
                                         fontSize = 16.sp,
-                                        color = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Color(0xFFDC2626) else Color(0xFF059669)
+                                        color = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) RedStatus else GreenStatus
                                     )
                                     Spacer(modifier = Modifier.height(8.dp))
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Color(0xFFDC2626) else Color(0xFF059669)))
+                                        Box(modifier = Modifier.size(6.dp).clip(CircleShape).background(if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) RedStatus else GreenStatus))
                                         Spacer(modifier = Modifier.width(4.dp))
                                         Text(
                                             if (log.status == PaymentStatus.PENDING) "TERTUNDA" else if (log.status == PaymentStatus.DITOLAK) "GAGAL" else "SELESAI",
                                             fontSize = 9.sp,
                                             fontWeight = FontWeight.ExtraBold,
-                                            color = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) Color(0xFFDC2626) else Color(0xFF059669)
+                                            color = if (log.status == PaymentStatus.PENDING || log.status == PaymentStatus.DITOLAK) RedStatus else GreenStatus
                                         )
                                     }
                                 }

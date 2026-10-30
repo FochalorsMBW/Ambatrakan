@@ -152,10 +152,10 @@ fun SettingsScreen(
                         modifier = Modifier
                             .size(40.dp)
                             .clip(CircleShape)
-                            .background(Color(0xFF3B82F6).copy(alpha = 0.1f)),
+                            .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(Icons.Default.FlightTakeoff, contentDescription = null, tint = Color(0xFF3B82F6), modifier = Modifier.size(20.dp))
+                        Icon(Icons.Default.FlightTakeoff, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
                     }
                     Spacer(modifier = Modifier.width(16.dp))
                     Column(modifier = Modifier.weight(1f)) {
@@ -188,7 +188,7 @@ fun SettingsScreen(
                     Column(modifier = Modifier.padding(8.dp)) {
                         SettingRowItem(
                             icon = Icons.Default.PeopleAlt,
-                            iconColor = Color(0xFFF59E0B),
+                            iconColor = YellowStatus,
                             title = "Kelola Penghuni",
                             subtitle = "Atur daftar penghuni kontrakan",
                             onClick = { showOccupantsDialog = true }
@@ -210,7 +210,7 @@ fun SettingsScreen(
                     Column(modifier = Modifier.padding(8.dp)) {
                         SettingRowItem(
                             icon = Icons.Default.ReceiptLong,
-                            iconColor = Color(0xFF10B981),
+                            iconColor = GreenStatus,
                             title = "Pengaturan Tagihan",
                             subtitle = "Atur daftar dan jenis tagihan",
                             onClick = { showManageBillsDialog = true }
@@ -241,7 +241,7 @@ fun SettingsScreen(
                     Divider(modifier = Modifier.padding(horizontal = 16.dp), color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.5f))
                     SettingRowItem(
                         icon = Icons.Default.Security,
-                        iconColor = Color(0xFF10B981),
+                        iconColor = GreenStatus,
                         title = "Privasi dan Keamanan",
                         subtitle = "Kata sandi, sidik jari",
                         onClick = { showSecurityDialog = true }
